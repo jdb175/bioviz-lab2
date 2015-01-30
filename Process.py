@@ -42,8 +42,6 @@ def process(data_loc, names_loc, out_loc):
 	f = open(out_loc, 'w')
 	f.write(csv_file)
 
-	print csv_file
-
 def processHeaders(names_loc):
 	"""
 	Method for processing the header data
