@@ -74,6 +74,9 @@ def processHeaders(names_loc):
 	for name in names:
 		csv_file+= ', ' + name
 
+	print types
+	print names
+
 	f.close()
 	return csv_file, names, types
 
