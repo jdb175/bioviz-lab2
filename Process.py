@@ -32,56 +32,17 @@ def main():
 		print "Please input a data file, names file, and output file"
 
 def process(data_loc, names_loc, out_loc):
-	#process header info
-	firstline, names, types = processHeaders(names_loc)
 	#process data
-	data_text = processData(data_loc, types)
+	data_text = processData(data_loc)
 
 	#output data
-	csv_file = firstline+ "\n" + data_text
+	csv_file = "type, animal name, hair, feathers, eggs, milk, airborne, aquatic, predator, toothed, backbone, breathes, venomous, fins, legs, tail, domestic, catsize\n" + data_text
 	f = open(out_loc, 'w')
 	f.write(csv_file)
 
-def processHeaders(names_loc):
-	"""
-	Method for processing the header data
-	"""
-	csv_file = ""
-	names = []
-	types = []
-
-	#Read in Headers
-	f = open(names_loc, 'r')
-	is_names = False
-	for line in f:
-		if is_names:
-			#print line
-			if line == "\n":
-				break
-			#match parts
-			match = re.search('[0-9]+\. (.+?)[\t\n\r\f\v:]+(.+)', line)
-			name = match.group(1).strip()
-			category = match.group(2).strip().split(" ")[0]
-			#append them into lists
-			names.append(name)
-			types.append(category)
-		#Find the start of headers
-		elif line == "7. Attribute Information: (name of attribute and type of value domain)\n":
-			is_names = True
-
-	#Add headers to file
-	csv_file+=names.pop()
-	for name in names:
-		csv_file+= ', ' + name
-
-	print types
-	print names
-
-	f.close()
-	return csv_file, names, types
-
-def processData(data_loc, types):
+def processData(data_loc):
 	data_text = ""
+	types = ['Unique', 'Boolean', 'Boolean', 'Boolean', 'Boolean', 'Boolean', 'Boolean', 'Boolean', 'Boolean', 'Boolean', 'Boolean', 'Boolean', 'Boolean', 'Numeric', 'Boolean', 'Boolean', 'Boolean', 'Numeric']
 
 	#read in each line
 	f = open(data_loc, 'r')
